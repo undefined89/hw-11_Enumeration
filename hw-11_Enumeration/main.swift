@@ -6,56 +6,72 @@ import Darwin
 var users: [User] = []
 
 var code = 0
-for i in 1...5 {
-    print("Choose your country: ")
-    var country = readLine()
+
+//for i in 1...5 {
+//    print("Choose your country: ")
+//    var country = readLine()
+//
+//    print("Enter your phone number: ")
+//    var number = readLine()
+//
+//    switch country {
+//    case "Kyrgyzstan":
+//        code = CountryCode.Kyrgyzstan.rawValue
+//        var user1 = User(countryCode: CountryCode(rawValue: code) ?? .none, phoneNumber: "+\(code) \(number!)")
+//        print("Страна: \(country!), номер телефона: +\(code) \(Int(number!)!)")
+//        users.append(user1)
+//    case "Canada":
+//        code = CountryCode.Canada.rawValue
+//        var user2 = User(countryCode: CountryCode(rawValue: code) ?? .none, phoneNumber: "+\(code) \(number!)")
+//        print("Страна: \(country!), номер телефона: +\(code) \(Int(number!)!)")
+////        print(dump(user2))
+//        users.append(user2)
+//    case "Ireland":
+//        code = CountryCode.Ireland.rawValue
+//        var user3 = User(countryCode: CountryCode(rawValue: code) ?? .none, phoneNumber: "+\(code) \(number!)")
+//        print("Страна: \(country!), номер телефона: +\(code) \(Int(number!)!)")
+//        users.append(user3)
+//    case "Czech Republic":
+//        code = CountryCode.CzechRepublic.rawValue
+//        var user4 = User(countryCode: CountryCode(rawValue: code) ?? .none, phoneNumber: "+\(code) \(number!)")
+//        print("Страна: \(country!), номер телефона: +\(code) \(Int(number!)!)")
+//        users.append(user4)
+//    default:
+////        code = CountryCode.none.rawValue
+//        print("Your country is not on the list, try again!!!")
+//    }
+//}
+
+for i in 1...3 {
+    print("Choose your country code: ")
+    var codeForCountry = readLine()
     
     print("Enter your phone number: ")
     var number = readLine()
-        
-    switch country {
-    case "Kyrgyzstan":
-        code = CountryCode.Kyrgyzstan.rawValue
-        var user1 = User(countryCode: CountryCode(rawValue: code) ?? .none, phoneNumber: "+\(code) \(number!)")
-        print("Страна: \(country!), номер телефона: +\(code) \(Int(number!)!)")
-        users.append(user1)
-    case "Canada":
-        code = CountryCode.Canada.rawValue
-        var user2 = User(countryCode: CountryCode(rawValue: code) ?? .none, phoneNumber: "+\(code) \(number!)")
-        print("Страна: \(country!), номер телефона: +\(code) \(Int(number!)!)")
-//        print(dump(user2))
-        users.append(user2)
-    case "Ireland":
-        code = CountryCode.Ireland.rawValue
-        var user3 = User(countryCode: CountryCode(rawValue: code) ?? .none, phoneNumber: "+\(code) \(number!)")
-        print("Страна: \(country!), номер телефона: +\(code) \(Int(number!)!)")
-        users.append(user3)
-    case "Czech Republic":
-        code = CountryCode.CzechRepublic.rawValue
-        var user4 = User(countryCode: CountryCode(rawValue: code) ?? .none, phoneNumber: "+\(code) \(number!)")
-        print("Страна: \(country!), номер телефона: +\(code) \(Int(number!)!)")
-        users.append(user4)
-    default:
-//        code = CountryCode.none.rawValue
-        print("Your country is not on the list, try again!!!")
-    }
+    
+    var user = User(countryCode: CountryCode(rawValue: codeForCountry!) ?? .none, phoneNumber: "\(codeForCountry!) \(number!)")
+    
+    print("Код страны: \(codeForCountry!), номер телефона: \(codeForCountry!) \(number!)")
+
+        users.append(user)
 }
 
-//print(dump(users))
+print(dump(users))
 
-print("Choose a country: ")
+print("Choose a country to filter: ")
 var country = readLine()
 
 for user in users {
-    if country == "Canada" {
+    switch country {
+    case "Canada":
         user.getPhoneNumbersForCanada()
-    } else if country == "Ireland" {
+    case "Ireland":
         user.getPhoneNumbersForIreland()
-    } else if country == "Kyrgyzstan" {
+    case "Kyrgyzstan":
         user.getPhoneNumbersForKyrgyzstan()
-    } else if country == "Czech Republic" {
+    case "Czech Republic":
         user.getPhoneNumbersForCzechRepublic()
-    } else {
+    default:
         print("No country found on the list")
     }
 }
